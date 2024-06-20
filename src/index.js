@@ -6,7 +6,16 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(bodyParser.json());
-app.use(cors());
+
+// Set up CORS to allow your specific domain
+const corsOptions = {
+    origin: 'https://www.acososexualyopal.com', // Replace with your actual domain
+    methods: 'GET,POST,OPTIONS',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true
+};
+
+app.use(cors(corsOptions));
 
 // Initialize SQLite database
 const db = new sqlite3.Database('./geoacoso.sqlite', (err) => {
@@ -15,12 +24,16 @@ const db = new sqlite3.Database('./geoacoso.sqlite', (err) => {
     } else {
         console.log('Connected to the SQLite database.');
         db.run(`CREATE TABLE IF NOT EXISTS coordinates (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        latitude FLOAT,
-        longitude FLOAT,
-        captured_at TEXT DEFAULT CURRENT_TIMESTAMP)`);
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            latitude FLOAT,
+            longitude FLOAT,
+            captured_at TEXT DEFAULT CURRENT_TIMESTAMP
+        )`);
     }
 });
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 
 // Get all coordinates
 app.get('/coordinates', (req, res) => {
@@ -35,7 +48,7 @@ app.get('/coordinates', (req, res) => {
 
 // Add a new coordinate
 app.post('/coordinates', (req, res) => {
-    console.log(`New report captured a ${new Date}`)
+    console.log(`New report captured at ${new Date()}`);
     const { latitude, longitude } = req.body;
     if (!latitude || !longitude) {
         res.status(400).send('Invalid input');
