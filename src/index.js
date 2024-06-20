@@ -9,7 +9,8 @@ app.use(bodyParser.json());
 
 // Define a list of allowed origins
 const allowedOrigins = [
-    'https://www.acososexualyopal.com'
+    'https://www.acososexualyopal.com',
+    'http://localhost:3000'
   ];
 
   const corsOptions = {
