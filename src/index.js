@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 // Define a list of allowed origins
 const allowedOrigins = [
   'https://www.acososexualyopal.com', // Typically you would not specify the port if serving over https
-  'http://18.191.56.148:3000',         // Replace with your actual server IP and port
+  'http://18.191.56.149:3000',         // Replace with your actual server IP and port
   'http://172.31.45.243:3000',         // Replace with your actual server IP and port
   'http://localhost:3000'              // Localhost for development
 ];
