@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 // Define a list of allowed origins
 const allowedOrigins = [
   'https://www.acososexualyopal.com',
+  'https://acososexualyopal.com',
   'http://18.191.56.149:3000',
   'http://172.31.45.244:3000',
   'http://localhost:3000'
